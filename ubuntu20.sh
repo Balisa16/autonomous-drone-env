@@ -19,8 +19,8 @@ ins_ardupilot_mavproxy()
     git checkout Copter-4.4
     git submodule update --init --recursive
 
-    cd ~/drone/ardupilot/ArduCopter
-    sim_vehicle.py -w
+    # cd ~/drone/ardupilot/ArduCopter
+    # sim_vehicle.py -w
 }
 
 ins_gazebo()
