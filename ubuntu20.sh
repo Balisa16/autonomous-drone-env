@@ -130,4 +130,5 @@ ins_simulation()
 
     # Register Gazebo Model Path
     echo "GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:$HOME/drone/ws/src/simulation/models:$HOME/drone/ws/src/simulation/models2" >> ~/.bashrc
+    echo "source ~/drone/ws/src/simulation/scripts/sitl.sh" >> ~/.bashrc 
 }
