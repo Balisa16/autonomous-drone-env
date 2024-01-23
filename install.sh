@@ -16,6 +16,16 @@ install_ubuntu20()
     sudo apt install -y cmake git
 
     ins_ardupilot_mavproxy
+
+    ins_gazebo
+
+    ins_ros
+
+    setup_workspace
+
+    ins_simulation
+
+    success
 }
 
 install_ubuntu18()

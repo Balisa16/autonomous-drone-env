@@ -131,4 +131,14 @@ ins_simulation()
     # Register Gazebo Model Path
     echo "GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:$HOME/drone/ws/src/simulation/models:$HOME/drone/ws/src/simulation/models2" >> ~/.bashrc
     echo "source ~/drone/ws/src/simulation/scripts/sitl.sh" >> ~/.bashrc 
+    source ~/.bashrc
+}
+
+success()
+{
+    echo -e "\n\n\033[1;32m>>> Installation Finished\033[0m"
+    echo -e "You can try this :"
+    echo -e "+ Terminal 1 : \033[32msim\033[0m"
+    echo -e "+ Terminal 2 : \033[32msitl\033[0m"
+    echo -e "+ Terminal 3 : \033[32mapm_sim\033[0m"
 }
