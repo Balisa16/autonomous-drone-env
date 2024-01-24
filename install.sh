@@ -2,7 +2,7 @@
 
 install_ubuntu20()
 {
-    source ubuntu20.sh
+    source source/ubuntu20.sh
 
     init_dir
 
@@ -30,7 +30,30 @@ install_ubuntu20()
 
 install_ubuntu18()
 {
+    source source/ubuntu18.sh
+
+    init_dir
+
     echo "Installing System on Ubuntu 18.04"
+
+    echo -e "\n\n\033[1;32m>>> Updating Ubuntu\033[0m"
+    sudo apt update
+    sudo apt upgrade -y
+    
+    echo -e "\n\n\033[1;32m>>> Installing CMake and Git\033[0m"
+    sudo apt install -y cmake git
+
+    ins_ardupilot_mavproxy
+
+    ins_gazebo
+
+    ins_ros
+
+    setup_workspace
+
+    ins_simulation
+
+    success
 }
 
 # Check if the /etc/os-release file exists

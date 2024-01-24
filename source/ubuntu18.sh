@@ -11,16 +11,20 @@ ins_ardupilot_mavproxy()
     echo -e "\n\n\033[1;32m>>> Installing Ardupilot and MAVProxy\033[0m"
     cd ~/drone
     git clone https://github.com/ArduPilot/ardupilot.git
-    cd ardupilot
-    Tools/environment_install/install-prereqs-ubuntu.sh -y
-    . ~/.profile
 
-    # Checkout into the Copter branch
-    git checkout Copter-4.4
+    cd ardupilot
+
+    git checkout Copter-3.6
     git submodule update --init --recursive
 
-    # cd ~/drone/ardupilot/ArduCopter
-    # sim_vehicle.py -w
+    sudo apt install python-matplotlib python-serial python-wxgtk3.0 python-wxtools python-lxml python-scipy python-opencv ccache gawk python-pip python-pexpect
+
+    sudo pip install future pymavlink MAVProxy
+
+    echo "export PATH=$PATH:$HOME/drone/ardupilot/Tools/autotest" >> ~/.bashrc
+    echo "export PATH=/usr/lib/ccache:$PATH" >> ~/.bashrc
+
+    source ~/.bashrc
 }
 
 ins_gazebo()
@@ -33,10 +37,11 @@ ins_gazebo()
     sudo apt update
 
     # Install Gazebo
-    sudo apt-get install -y gazebo11 libgazebo11-dev
+    sudo apt install -y gazebo9 libgazebo9-dev
     cd ~/drone
     git clone https://github.com/khancyr/ardupilot_gazebo.git
     cd ardupilot_gazebo
+    git checkout dev
 
     #  Build and Install
     mkdir build
@@ -51,13 +56,11 @@ ins_gazebo()
     # Set Gazebo Model Path
     echo 'export GAZEBO_MODEL_PATH=~/drone/ardupilot_gazebo/models' >> ~/.bashrc
     . ~/.bashrc
-
-
 }
 
 ins_ros()
 {
-    echo -e "\n\n\033[1;32m>>> Installing ROS\033[0m"
+    echo -e "\n\n\033[1;32m>>> Installing ROS Melodic\033[0m"
 
     # Setup Source and Keys
     sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -68,17 +71,17 @@ ins_ros()
     sudo apt update
 
     # Install ROS Desktop Full
-    sudo apt install -y ros-noetic-desktop-full
+    sudo apt install -y ros-melodic-desktop-full
 
     # Register ROS path into bashrc script
-    echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-    . ~/.bashrc
+    echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+    source ~/.bashrc
 
     #  Install Dependencies for ROS Building Packages
-    sudo apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+    sudo apt install -y python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
 
     # Initialize rosdep
-    sudo apt install python3-rosdep
+    sudo apt install -y python-rosdep
     sudo rosdep init
     rosdep update
 }
@@ -88,16 +91,13 @@ setup_workspace()
     echo -e "\n\n\033[1;32m>>> Setting up Workspace\033[0m"
 
     # Install desire dependencies
-    sudo apt-get install -y python3-wstool python3-rosinstall-generator python3-catkin-lint python3-pip python3-catkin-tools
-    pip3 install osrf-pycommon
+    sudo apt-get install python-wstool python-rosinstall-generator python-catkin-tools
 
 
     mkdir -p ~/drone/ws/src
     cd ~/drone/ws
     catkin init
-
-    cd ~/drone/ws
-    . /opt/ros/noetic/setup.bash
+    . /opt/ros/melodic/setup.bash
     wstool init ~/drone/ws/src
 
     rosinstall_generator --upstream mavros | tee /tmp/mavros.rosinstall

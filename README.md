@@ -19,3 +19,10 @@ Find a comfortable seat and enjoy your coffee :coffee: while waiting for the ins
 Compilation just occurred in the first SITL run, so it will be faster in subsequent SITL runs.
 2. When installation is finished and you're run ```catkin build``` in ~/drone/ws. Your terminal should looks like this :
 ![First Build](images/build.png)
+3. I am not tested this shell for Ubuntu 18 yet. So may will be there some error. I would like say thanks if there someone tested and give correction for [Ubuntu 18](source/ubuntu18.sh) installation script.
+
+## References
+1. [Intelligent-Quads](https://github.com/Intelligent-Quads)
+2. [Ardupilot](https://github.com/Ardupilot)
+3. [ROS](https://github.com/ros)
+4. [Gazebo](https://gazebosim.org/home)
