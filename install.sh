@@ -59,6 +59,10 @@ case $install_type in
     ins_simulation
 
     success
+
+    source source/uav_system.sh
+
+    source source/mission_planner.sh
     ;;
   "simulation")
     ins_simulation
