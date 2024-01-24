@@ -6,8 +6,6 @@ install_ubuntu20()
 
     init_dir
 
-    echo "Installing System on Ubuntu 20.04"
-
     echo -e "\n\n\033[1;32m>>> Updating Ubuntu\033[0m"
     sudo apt update
     sudo apt upgrade -y
@@ -33,8 +31,6 @@ install_ubuntu18()
     source source/ubuntu18.sh
 
     init_dir
-
-    echo "Installing System on Ubuntu 18.04"
 
     echo -e "\n\n\033[1;32m>>> Updating Ubuntu\033[0m"
     sudo apt update
