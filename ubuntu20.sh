@@ -97,6 +97,7 @@ setup_workspace()
     catkin init
 
     cd ~/drone/ws
+    . /opt/ros/noetic/setup.bash
     wstool init ~/drone/ws/src
 
     rosinstall_generator --upstream mavros | tee /tmp/mavros.rosinstall
