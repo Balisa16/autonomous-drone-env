@@ -66,6 +66,9 @@ case $install_type in
   "uav-system")
     source source/uav_system.sh
     ;;
+  "mission-planner")
+    source source/mission_planner.sh
+    ;;
   *)
     echo "Unknown option: $install_type"
     ;;

@@ -1,16 +1,18 @@
 # Autonomous Drone Installation
 
-Script to install simple Autonomous Drone Simulation System in Ubuntu18 or Ubuntu20. This ideally start after you install your ubuntu (New Ubuntu)
+Script to install simple Autonomous Drone Simulation System in Ubuntu 18.04 or Ubuntu 20.04. This ideally start after you install your ubuntu (New Ubuntu)
 
 ## Run
-Make sure you have administrator access
-```
-sudo ls
-```
 Run Installation
 ```
-./install.sh
+./install.sh <option>
+source ~/.bashrc
 ```
+***option*** can be :
+- **mission-planner** : if you want to install mission planner only.
+- **uav-system** : if you want to try simulation of my Autonomous UAV System (beta) only.
+- **simulation** : if you already install ardupilot and gazebo and want to install simulator.
+- **all** or leave it blank : if you want to install all.
 Find a comfortable seat and enjoy your coffee :coffee: while waiting for the installation process to finish. This process will take about 25 minutes.
 
 ## Noted
