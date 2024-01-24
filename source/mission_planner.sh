@@ -45,4 +45,4 @@ echo -e "mp(){\n" >> $home_dir/drone/mp/missionplanner.sh
 echo -e "\tmono $home_dir/drone/mp/MissionPlanner.exe\n}" >> $home_dir/drone/mp/missionplanner.sh
 
 echo "source $home_dir/drone/mp/missionplanner.sh" >> ~/.bashrc
-echo "Mission Planner installed. You can use \033[1;32mmp\033[0m command to run the Mission Planner."
+echo -e "Mission Planner installed.\n>>> You can use \033[1;32mmp\033[0m command to run the Mission Planner."
