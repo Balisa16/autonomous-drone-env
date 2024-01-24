@@ -64,7 +64,7 @@ case $install_type in
     ins_simulation
     ;;
   "uav-system")
-    echo "You choose UAV-Simulation"
+    source source/uav_system.sh
     ;;
   *)
     echo "Unknown option: $install_type"
