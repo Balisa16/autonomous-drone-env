@@ -118,6 +118,8 @@ if [ $ubuntu_ver -eq 0 ]; then
 fi
 
 source source/core.sh
+source source/uav_system.sh
+source source/mission_planner.sh
 
 case $install_type in
   "all")
@@ -131,30 +133,30 @@ case $install_type in
 
     ins_simulation
 
+    ins_uav_system
+
+    ins_mission_planner
+
     success
-
-    source source/uav_system.sh
-
-    source source/mission_planner.sh
     ;;
   "ardupilot")
     ins_ardupilot_mavproxy false
     ;;
   "gazebo")
-    ins_gazebo
+    ins_gazebo false
     ;;
   "ros")
     ins_ros
-    setup_workspace
+    setup_workspace false
     ;;
   "simulation")
-    ins_simulation
+    ins_simulation false
     ;;
   "uav-system")
-    source source/uav_system.sh
+    ins_uav_system false
     ;;
   "mission-planner")
-    source source/mission_planner.sh
+    ins_mission_planner false
     ;;
   *)
     echo "Unknown option: $install_type"

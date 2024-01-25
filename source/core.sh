@@ -1,7 +1,5 @@
 #!/usr/bin/bash
 
-echo "Installing System on Ubuntu 20.04"
-
 ins_ardupilot_mavproxy()
 {
     echo -e "\n\n\033[1;32m>>> Installing Ardupilot and MAVProxy\033[0m"
@@ -36,6 +34,7 @@ ins_ardupilot_mavproxy()
 
     local args1=$1
     if [ "$args1" = "false" ]; then
+        echo -e "\033[1;32m>>> Finished installing Ardupilot and MAVProxy\033[0m"
         exit 1
     fi
 }
@@ -81,6 +80,7 @@ ins_gazebo()
 
     local args1=$1
     if [ "$args1" = "false" ]; then
+        echo -e "\033[1;32m>>> Finished installing Gazebo\033[0m"
         exit 1
     fi
 }
@@ -127,6 +127,7 @@ ins_ros()
 
     local args1=$1
     if [ "$args1" = "false" ]; then
+        echo -e "\033[1;32m>>> Finished installing ROS\033[0m"
         exit 1
     fi
 }
@@ -172,6 +173,7 @@ setup_workspace()
 
     local args1=$1
     if [ "$args1" = "false" ]; then
+        echo -e "\033[1;32m>>> Finished setup workspace\033[0m"
         exit 1
     fi
 }
@@ -196,6 +198,7 @@ ins_simulation()
 
     local args1=$1
     if [ "$args1" = "false" ]; then
+        echo -e "\033[1;32m>>> Finished installing Simulation\033[0m"
         exit 1
     fi
 }
