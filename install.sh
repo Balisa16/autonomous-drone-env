@@ -162,3 +162,5 @@ case $install_type in
     echo "Unknown option: $install_type"
     ;;
 esac
+
+echo -e "\n\n\033[1;33mWarning :\033[0m Please run \033[1msource ~/.bashrc\033[0m to activate the new environment"
