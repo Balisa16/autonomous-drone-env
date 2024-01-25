@@ -8,11 +8,7 @@ Run Installation
 ./install.sh <option>
 source ~/.bashrc
 ```
-***option*** can be :
-- **mission-planner** : if you want to install mission planner only.
-- **uav-system** : if you want to try simulation of my Autonomous UAV System (beta) only.
-- **simulation** : if you already install ardupilot and gazebo and want to install simulator.
-- **all** or leave it blank : if you want to install all.
+<i>** use ```--help```to see mandatory arguments that you can used.</i></br></br>
 Find a comfortable seat and enjoy your coffee :coffee: while waiting for the installation process to finish. This process will take about 25 minutes.
 
 ## Noted

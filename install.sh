@@ -8,38 +8,25 @@ is_installed() {
   dpkg -l "$1" &> /dev/null
 }
 
-echo -e "\n\n\033[1;32m>>> Updating Ubuntu\033[0m"
-sudo apt update
-
-# Check if cmake is installed
-if ! is_installed cmake; then
-  echo "Installing cmake..."
-  echo -e "\n\n\033[1;32m>>> Installing CMake\033[0m"
-  sudo apt install -y cmake
-fi
-
-# Check if git is installed
-if ! is_installed git; then
-  echo "Installing git..."
-  echo -e "\n\n\033[1;32m>>> Installing Git\033[0m"
-  sudo apt install -y git
-fi
-
 help_message()
 {
   echo "Usage: $0 [options]"
-  echo "Mandatory arguments to long options are mandatory for short options too :"
-  echo "  -h, --help       Show this help message and exit. You're see it now"
-  echo "  -v, --version    Show version information"
-  echo "  -d, --directory  Specify the homedirectory to install. Default will be ~ or $HOME"
-  echo "  -m, --mode       Specify the install type. Must be one of :"
-  echo "                   all             Install all (default)"
-  echo "                   ardupilot       [1] Install Ardupilot and Mavproxy only"
-  echo "                   gazebo          [2] Install gazebo only"
-  echo "                   ros             [3] Install ROS only"
-  echo "                   simulation      [4] Install simulation only"
-  echo "                   uav-system      [5] Install UAV-System (beta version) only"
-  echo "                   mission-planner [6] Install Mission-Planner (beta version) only"
+  echo -e "\nMandatory arguments to long options are mandatory for short options too :"
+  echo -e "\033[1m  -h, --help       \033[0mShow this help message and exit. You're see it now"
+  echo -e "\033[1m  -v, --version    \033[0mShow version information"
+  echo -e "\033[1m  -d, --directory  \033[0mSpecify the homedirectory to install. Default will be ~ or $HOME"
+  echo -e "\033[1m  -m, --mode       \033[0mSpecify the install type. Must be one of :"
+  echo -e "                   \033[3mall             \033[0mInstall all (default)"
+  echo -e "                   \033[3mardupilot       \033[0m[1] Install Ardupilot and Mavproxy only"
+  echo -e "                   \033[3mgazebo          \033[0m[2] Install gazebo only"
+  echo -e "                   \033[3mros             \033[0m[3] Install ROS only"
+  echo -e "                   \033[3msimulation      \033[0m[4] Install simulation only"
+  echo -e "                   \033[3muav-system      \033[0m[5] Install UAV-System (beta version) only"
+  echo -e "                   \033[3mmission-planner \033[0m[6] Install Mission-Planner (beta version) only"
+  echo -e "\n\033[1mExample :\033[0m"
+  echo -e "\033[1;32m$0 -m simulation                \033[0mTo install simulation only in default directory : $home_dir"
+  echo -e "\033[1;32m$0 -d /home/user                \033[0mTo install all system in desired directory"
+  echo -e "\033[1;32m$0 -m simulation -d /home/user  \033[0mTo install simulation only in desired directory"
 }
 
 counter=1
@@ -76,6 +63,23 @@ for arg in "$@"; do
     ((counter++))
   fi
 done
+
+echo -e "\n\n\033[1;32m>>> Updating Ubuntu\033[0m"
+sudo apt update
+
+# Check if cmake is installed
+if ! is_installed cmake; then
+  echo "Installing cmake..."
+  echo -e "\n\n\033[1;32m>>> Installing CMake\033[0m"
+  sudo apt install -y cmake
+fi
+
+# Check if git is installed
+if ! is_installed git; then
+  echo "Installing git..."
+  echo -e "\n\n\033[1;32m>>> Installing Git\033[0m"
+  sudo apt install -y git
+fi
 
 if [ ! -d "$home_dir/drone" ]; then
   echo -e "\n\n\033[1;32m>>> Creating Copter Directory\033[0m"
