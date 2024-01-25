@@ -2,12 +2,6 @@
 
 echo "Installing System on Ubuntu 18.04"
 
-init_dir()
-{
-    echo -e "\n\n\033[1;32m>>> Creating Copter Directory\033[0m"
-    mkdir -p ~/drone
-}
-
 ins_ardupilot_mavproxy()
 {
     echo -e "\n\n\033[1;32m>>> Installing Ardupilot and MAVProxy\033[0m"
