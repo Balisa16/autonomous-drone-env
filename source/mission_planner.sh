@@ -2,7 +2,6 @@
 
 echo -e "\n\n\033[1;32m>>> Install Mission Planner\033[0m"
 
-home_dir="~"
 mkdir -p $home_dir/drone/mp
 
 if [ -e /etc/os-release ]; then

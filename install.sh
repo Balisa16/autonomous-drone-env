@@ -2,33 +2,7 @@
 
 home_dir="$(cd && pwd)"
 install_type="all"
-
-# Check if the /etc/os-release file exists
-if [ -e /etc/os-release ]; then
-    # Source the file to get the variables
-    . /etc/os-release
-
-    # Check if the variable ID is set and if it is "ubuntu"
-    if [ "$ID" == "ubuntu" ]; then
-        # Check the version
-        if [ "$VERSION_ID" == "18.04" ]; then
-            echo "Ubuntu 18.04 detected."
-            source source/ubuntu18.sh
-        elif [ "$VERSION_ID" == "20.04" ]; then
-            echo "Ubuntu 20.04 detected."
-            source source/ubuntu20.sh
-        else
-            echo "Ubuntu version other than 18.04 or 20.04 detected."
-            exit 1
-        fi
-    else
-        echo "Not an Ubuntu distribution."
-        exit 1
-    fi
-else
-    echo "Unable to determine the distribution."
-    exit 1
-fi
+ubuntu_ver=0
 
 is_installed() {
   dpkg -l "$1" &> /dev/null
@@ -58,7 +32,7 @@ help_message()
   echo "  -h, --help       Show this help message and exit. You're see it now"
   echo "  -v, --version    Show version information"
   echo "  -d, --directory  Specify the homedirectory to install. Default will be ~ or $HOME"
-  echo "  -m, --mode       Specify the install type. Default is all. Must be one of :"
+  echo "  -m, --mode       Specify the install type. Must be one of :"
   echo "                   all             Install all (default)"
   echo "                   ardupilot       [1] Install Ardupilot and Mavproxy only"
   echo "                   gazebo          [2] Install gazebo only"
@@ -108,50 +82,75 @@ if [ ! -d "$home_dir/drone" ]; then
   mkdir -p $home_dir/drone
 fi
 
+# Check if the /etc/os-release file exists
+if [ -e /etc/os-release ]; then
+    # Source the file to get the variables
+    . /etc/os-release
+
+    # Check if the variable ID is set and if it is "ubuntu"
+    if [ "$ID" == "ubuntu" ]; then
+        # Check the version
+        if [ "$VERSION_ID" == "18.04" ]; then
+            echo "Ubuntu 18.04 detected."
+            ubuntu_ver=18
+        elif [ "$VERSION_ID" == "20.04" ]; then
+            echo "Ubuntu 20.04 detected."
+            ubuntu_ver=20
+        else
+            echo "Ubuntu version other than 18.04 or 20.04 detected."
+            exit 1
+        fi
+    else
+        echo "Not an Ubuntu distribution."
+        exit 1
+    fi
+else
+    echo "Unable to determine the distribution."
+    exit 1
+fi
+
+if [ $ubuntu_ver -eq 0 ]; then
+  exit 1
+fi
+
+source source/core.sh
+
 case $install_type in
   "all")
-    echo "Installing all"
+    ins_ardupilot_mavproxy
 
-    # ins_ardupilot_mavproxy
+    ins_gazebo
 
-    # ins_gazebo
+    ins_ros
 
-    # ins_ros
+    setup_workspace
 
-    # setup_workspace
+    ins_simulation
 
-    # ins_simulation
+    success
 
-    # success
+    source source/uav_system.sh
 
-    # source source/uav_system.sh
-
-    # source source/mission_planner.sh
+    source source/mission_planner.sh
     ;;
   "ardupilot")
-    echo "Installing ardupilot and mavproxy"
-    # ins_ardupilot_mavproxy
+    ins_ardupilot_mavproxy false
     ;;
   "gazebo")
-    echo "Installing gazebo"
-    # ins_gazebo
+    ins_gazebo
     ;;
   "ros")
-    echo "Installing ROS"
-    # ins_ros
-    # setup_workspace
+    ins_ros
+    setup_workspace
     ;;
   "simulation")
-    echo "Installing simulation"
-    # ins_simulation
+    ins_simulation
     ;;
   "uav-system")
-    echo "Installing uav-system"
-    # source source/uav_system.sh
+    source source/uav_system.sh
     ;;
   "mission-planner")
-    echo "Installing mission-planner"
-    # source source/mission_planner.sh
+    source source/mission_planner.sh
     ;;
   *)
     echo "Unknown option: $install_type"

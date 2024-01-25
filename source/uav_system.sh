@@ -1,7 +1,5 @@
 #!/usr/bin/bash
 
-home_dir="~" 
-
 echo -e "\n\n\033[1;32m>>> Install UAV System\033[0m"
 
 sudo apt update
