@@ -191,6 +191,18 @@ ins_simulation()
     # Build Simulation
     catkin build
 
+    # Rewrite sitl.sh
+    sitl_file="$home_dir/drone/ws/src/simulation/scripts/sitl.sh"
+    sudo rm "$sitl_file"
+    touch "$sitl_file"
+    echo -e "#!$(which bash)\n" >> "$sitl_file"
+    echo -e "sim()\n{\n\troslaunch simulation sitl.launch\n}\n" >> "$sitl_file"
+    echo -e "sitl()\n{\n\tcd $home_dir/drone/ardupilot/ArduCopter\n\t. ~/.profile\n\tsim_vehicle.py -v ArduCopter -f gazebo-iris --console\n}\n" >> "$sitl_file"
+    echo -e "apm_sim()\n{\n\troslaunch simulation apm.launch\n}\n" >> "$sitl_file"
+    echo -e "apm()\n{\n\troslaunch mavros apm.launch\n}\n" >> "$sitl_file"
+
+    sudo chmod +x "$sitl_file"
+
     # Register Gazebo Model Path
     echo "GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:$home_dir/drone/ws/src/simulation/models:$home_dir/drone/ws/src/simulation/models2" >> ~/.bashrc
     echo "source $home_dir/drone/ws/src/simulation/scripts/sitl.sh" >> ~/.bashrc 
