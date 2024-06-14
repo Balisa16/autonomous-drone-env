@@ -6,7 +6,7 @@ Script to install simple Autonomous Drone Simulation System in Ubuntu 18.04 or U
 If you want to clone using git command
 ```
 sudo apt install git
-git clone https://github.com/Balisa16/Drone-Shell drone-shell
+git clone https://github.com/Balisa16/autonomous-drone-env drone-shell
 cd drone-shell
 ```
 Run Installation
